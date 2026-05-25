@@ -10,4 +10,13 @@
   justify-content: center;
   align-items: center;
   height: 100dvh;
+  flex-direction: column;
+}
+
+#userInput {
+  all: unset;
+  border: 1px solid rgb(218, 218, 218);
+  border-radius: 30px;
+  padding: 20px;
+  width: 40%;
 }
