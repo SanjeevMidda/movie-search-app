@@ -14,6 +14,8 @@ function App() {
     console.log(searchQuery);
   };
 
+  console.log(searchResults);
+
   return (
     <div className="App">
       <h1>MOVIE SEARCH APP</h1>
@@ -24,6 +26,12 @@ function App() {
         value={searchQuery}
         onChange={userInput}
       />
+
+      {appStatus === "loading" && "Data loading."}
+
+      {appStatus === "success" && "Data loaded."}
+
+      {appStatus === "error" && "Error loading data. Try again."}
     </div>
   );
 }
