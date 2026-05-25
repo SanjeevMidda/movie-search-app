@@ -1,13 +1,12 @@
 import "./styles/index.css";
 import { API } from "./config/api";
 import { useState } from "react";
+import useMovieSearch from "./hooks/useMovieSearch";
 
 function App() {
-  console.log(API);
-
   const [searchQuery, setSearchQuery] = useState("");
 
-  console.log(searchQuery);
+  useMovieSearch(API);
 
   const userInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
