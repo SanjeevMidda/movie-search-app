@@ -1,24 +1,34 @@
 import { useEffect, useState } from "react";
 import { Status } from "../types/status";
+import { API } from "../config/api";
 
-const useMovieSearch = async (url: any) => {
+const useMovieSearch = (url: any) => {
   const [searchResults, setSearchResults] = useState("");
+  const [appStatus, setAppStatus] = useState<Status>("loading");
 
-  try {
-    const request = await fetch(url);
+  const fetchData = async () => {
+    try {
+      setAppStatus("loading");
 
-    if (!request.ok) {
-      throw new Error(`HTTP error! Status: ${request.status}`);
+      const request = await fetch(url);
+
+      if (!request.ok) {
+        throw new Error(`HTTP error! Status: ${request.status}`);
+      }
+      const response = await request.json();
+      setAppStatus("success");
+
+      setSearchResults(response);
+    } catch (error) {
+      console.error("Network or fecth error", error);
+      setAppStatus("error");
     }
-    const response = await request.json();
+  };
 
-    setSearchResults(response);
-  } catch (error) {
-    console.error("Network or fecth error", error);
-  }
-
-  //   useEffect(() => {}, []);
-  return searchResults;
+  useEffect(() => {
+    fetchData();
+  }, [API]);
+  return { searchResults, appStatus };
 };
 
 export default useMovieSearch;
