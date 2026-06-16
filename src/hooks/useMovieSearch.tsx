@@ -20,7 +20,7 @@ const useMovieSearch = (url: string) => {
 
       setSearchResults(response);
     } catch (error) {
-      console.error("Network or fecth error", error);
+      console.error("Network or fetch error", error);
       setAppStatus("error");
     }
   };
