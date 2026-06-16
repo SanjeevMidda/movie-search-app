@@ -27,7 +27,7 @@ const useMovieSearch = (url: string) => {
 
   useEffect(() => {
     fetchData();
-  }, [API]);
+  }, [url]);
   return { searchResults, appStatus };
 };
 
