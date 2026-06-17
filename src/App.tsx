@@ -2,6 +2,7 @@ import "./styles/index.css";
 import { useEffect, useState } from "react";
 import useMovieSearch from "./hooks/useMovieSearch";
 import MovieCard from "./components/MovieCard";
+import MovieDetails from "./components/MovieDetails";
 
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -61,25 +62,7 @@ function App() {
           />
         ))}
 
-      {selectedMovie && (
-        <section className="selected-movie">
-          <h2>{selectedMovie.name}</h2>
-
-          {selectedMovie.image && (
-            <img src={selectedMovie.image.original} alt={selectedMovie.name} />
-          )}
-
-          <p>
-            Rating:
-            {selectedMovie.rating?.average ?? "N/A"}
-          </p>
-
-          <p>
-            Genres:
-            {selectedMovie.genres?.join(", ")}
-          </p>
-        </section>
-      )}
+      <MovieDetails movie={selectedMovie} />
     </div>
   );
 }
