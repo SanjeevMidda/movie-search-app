@@ -1,6 +1,7 @@
 import "./styles/index.css";
 import { useEffect, useState } from "react";
 import useMovieSearch from "./hooks/useMovieSearch";
+import MovieCard from "./components/MovieCard";
 
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -53,19 +54,11 @@ function App() {
       {appStatus === "success" &&
         searchResults.length > 0 &&
         searchResults.map((result: any) => (
-          <div
+          <MovieCard
             key={result.show.id}
-            onClick={() => setSelectedMovie(result.show)}
-            style={{ cursor: "pointer" }}
-          >
-            <h2>{result.show.name}</h2>
-
-            {result.show.image ? (
-              <img src={result.show.image.medium} alt={result.show.name} />
-            ) : (
-              <p>No image available</p>
-            )}
-          </div>
+            movie={result.show}
+            onSelect={setSelectedMovie}
+          />
         ))}
 
       {selectedMovie && (
