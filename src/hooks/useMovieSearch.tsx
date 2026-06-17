@@ -5,10 +5,12 @@ import { API } from "../config/api";
 const useMovieSearch = (url: string) => {
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [appStatus, setAppStatus] = useState<Status>("idle");
+  const [error, setError] = useState<string | null>(null);
 
   const fetchData = async () => {
     try {
       setAppStatus("loading");
+      setError(null);
 
       const request = await fetch(url);
 
@@ -19,8 +21,8 @@ const useMovieSearch = (url: string) => {
       setAppStatus("success");
 
       setSearchResults(response);
-    } catch (error) {
-      console.error("Network or fetch error", error);
+    } catch (err: any) {
+      setError(err.message);
       setAppStatus("error");
     }
   };
