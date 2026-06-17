@@ -19,12 +19,10 @@ function App() {
     `https://api.tvmaze.com/search/shows?q=${debouncedQuery}`
   );
 
-  const userInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
     console.log(searchQuery);
   };
-
-  console.log(searchResults);
 
   return (
     <div className="App">
@@ -34,7 +32,7 @@ function App() {
         type="text"
         id="userInput"
         value={searchQuery}
-        onChange={userInput}
+        onChange={handleInputChange}
       />
 
       {appStatus === "idle" && <p>Search for a TV show to get started.</p>}
