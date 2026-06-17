@@ -38,11 +38,22 @@ function App() {
         onChange={userInput}
       />
 
-      {appStatus === "loading" && "Data loading."}
+      {appStatus === "loading" && <p>Loading...</p>}
 
-      {appStatus === "success" && "Data loaded."}
+      {appStatus === "error" && <p>Error loading data. Try again.</p>}
 
-      {appStatus === "error" && "Error loading data. Try again."}
+      {appStatus === "success" &&
+        searchResults.map((result: any) => (
+          <div key={result.show.id}>
+            <h2>{result.show.name}</h2>
+
+            {result.show.image ? (
+              <img src={result.show.image.medium} alt={result.show.name} />
+            ) : (
+              <p>No image available</p>
+            )}
+          </div>
+        ))}
     </div>
   );
 }

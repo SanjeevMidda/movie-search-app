@@ -3,7 +3,7 @@ import { Status } from "../types/status";
 import { API } from "../config/api";
 
 const useMovieSearch = (url: string) => {
-  const [searchResults, setSearchResults] = useState("");
+  const [searchResults, setSearchResults] = useState<any[]>([]);
   const [appStatus, setAppStatus] = useState<Status>("loading");
 
   const fetchData = async () => {
