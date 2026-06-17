@@ -1,6 +1,20 @@
-export interface Movie {
-  show: string;
+// export interface Movie {
+//   show: string;
+//   name: string;
+//   image: string;
+//   sumamry: string;
+// }
+
+export interface Show {
+  id: number;
   name: string;
-  image: string;
-  sumamry: string;
+  summary?: string;
+  image?: {
+    medium: string;
+    original: string;
+  };
+  rating?: {
+    average: number | null;
+  };
+  genres: string[];
 }
