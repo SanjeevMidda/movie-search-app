@@ -15,6 +15,10 @@ function App() {
     return () => clearTimeout(timer);
   }, [searchQuery]);
 
+  useEffect(() => {
+    setSelectedMovie(null);
+  }, [debouncedQuery]);
+
   const { searchResults, appStatus } = useMovieSearch(
     `https://api.tvmaze.com/search/shows?q=${debouncedQuery}`
   );
