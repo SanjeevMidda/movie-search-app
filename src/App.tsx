@@ -27,14 +27,13 @@ function App() {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
-    console.log(searchQuery);
   };
 
   return (
     <div className="App">
       <h1>MOVIE SEARCH APP</h1>
 
-      <label htmlFor="userInput">Search TV Shows</label>
+      <label htmlFor="userInput"></label>
       <input
         type="text"
         id="userInput"

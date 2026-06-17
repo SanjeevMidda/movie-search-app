@@ -14,7 +14,11 @@ type MovieCardProps = {
 
 function MovieCard({ movie, onSelect }: MovieCardProps) {
   return (
-    <div onClick={() => onSelect(movie)} style={{ cursor: "pointer" }}>
+    <button
+      type="button"
+      className="movie-card"
+      onClick={() => onSelect(movie)}
+    >
       <h2>{movie.name}</h2>
 
       {movie.image ? (
@@ -22,7 +26,7 @@ function MovieCard({ movie, onSelect }: MovieCardProps) {
       ) : (
         <p>No image available</p>
       )}
-    </div>
+    </button>
   );
 }
 
