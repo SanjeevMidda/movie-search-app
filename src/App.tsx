@@ -5,7 +5,7 @@ import useMovieSearch from "./hooks/useMovieSearch";
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
   const [debouncedQuery, setDebouncedQuery] = useState("");
-  const [selectedMovie, setSelectMovie] = useState<any>(null);
+  const [selectedMovie, setSelectedMovie] = useState<any>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -28,6 +28,7 @@ function App() {
     <div className="App">
       <h1>MOVIE SEARCH APP</h1>
 
+      <label htmlFor="userInput">Search TV Shows</label>
       <input
         type="text"
         id="userInput"
@@ -50,7 +51,7 @@ function App() {
         searchResults.map((result: any) => (
           <div
             key={result.show.id}
-            onClick={() => setSelectMovie(result.show)}
+            onClick={() => setSelectedMovie(result.show)}
             style={{ cursor: "pointer" }}
           >
             <h2>{result.show.name}</h2>
