@@ -7,6 +7,7 @@ import { Status } from "./types/status";
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
   const [debouncedQuery, setDebouncedQuery] = useState("");
+  const [selectedMovie, setSelectMovie] = useState<any>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -51,7 +52,11 @@ function App() {
       {appStatus === "success" &&
         searchResults.length > 0 &&
         searchResults.map((result: any) => (
-          <div key={result.show.id}>
+          <div
+            key={result.show.id}
+            onClick={() => setSelectMovie(result.show)}
+            style={{ cursor: "pointer" }}
+          >
             <h2>{result.show.name}</h2>
 
             {result.show.image ? (
@@ -61,6 +66,26 @@ function App() {
             )}
           </div>
         ))}
+
+      {selectedMovie && (
+        <section className="selected-movie">
+          <h2>{selectedMovie.name}</h2>
+
+          {selectedMovie.image && (
+            <img src={selectedMovie.image.original} alt={selectedMovie.name} />
+          )}
+
+          <p>
+            Rating:
+            {selectedMovie.rating?.average ?? "N/A"}
+          </p>
+
+          <p>
+            Genres:
+            {selectedMovie.genres?.join(", ")}
+          </p>
+        </section>
+      )}
     </div>
   );
 }
