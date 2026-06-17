@@ -4,7 +4,7 @@ import { API } from "../config/api";
 
 const useMovieSearch = (url: string) => {
   const [searchResults, setSearchResults] = useState<any[]>([]);
-  const [appStatus, setAppStatus] = useState<Status>("loading");
+  const [appStatus, setAppStatus] = useState<Status>("idle");
 
   const fetchData = async () => {
     try {
@@ -26,6 +26,10 @@ const useMovieSearch = (url: string) => {
   };
 
   useEffect(() => {
+    if (!url) {
+      return;
+    }
+
     fetchData();
   }, [url]);
   return { searchResults, appStatus };

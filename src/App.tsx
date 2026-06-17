@@ -38,11 +38,18 @@ function App() {
         onChange={userInput}
       />
 
+      {appStatus === "idle" && <p>Search for a TV show to get started.</p>}
+
       {appStatus === "loading" && <p>Loading...</p>}
 
       {appStatus === "error" && <p>Error loading data. Try again.</p>}
 
+      {appStatus === "success" && searchResults.length === 0 && (
+        <p>No results found.</p>
+      )}
+
       {appStatus === "success" &&
+        searchResults.length > 0 &&
         searchResults.map((result: any) => (
           <div key={result.show.id}>
             <h2>{result.show.name}</h2>
