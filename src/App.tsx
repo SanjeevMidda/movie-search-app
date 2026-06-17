@@ -1,14 +1,23 @@
 import "./styles/index.css";
 import { API } from "./config/api";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useMovieSearch from "./hooks/useMovieSearch";
 import { Status } from "./types/status";
 
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [debouncedQuery, setDebouncedQuery] = useState("");
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedQuery(searchQuery);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [searchQuery]);
 
   const { searchResults, appStatus } = useMovieSearch(
-    `https://api.tvmaze.com/search/shows?q=${searchQuery}`
+    `https://api.tvmaze.com/search/shows?q=${debouncedQuery}`
   );
 
   const userInput = (e: React.ChangeEvent<HTMLInputElement>) => {
