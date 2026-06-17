@@ -1,8 +1,6 @@
 import "./styles/index.css";
-import { API } from "./config/api";
 import { useEffect, useState } from "react";
 import useMovieSearch from "./hooks/useMovieSearch";
-import { Status } from "./types/status";
 
 function App() {
   const [searchQuery, setSearchQuery] = useState("");

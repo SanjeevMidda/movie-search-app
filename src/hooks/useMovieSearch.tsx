@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Status } from "../types/status";
-import { API } from "../config/api";
 
 const useMovieSearch = (url: string) => {
   const [searchResults, setSearchResults] = useState<any[]>([]);
