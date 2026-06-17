@@ -7,7 +7,9 @@ import { Status } from "./types/status";
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
 
-  const { searchResults, appStatus } = useMovieSearch(API);
+  const { searchResults, appStatus } = useMovieSearch(
+    `https://api.tvmaze.com/search/shows?q=${searchQuery}`
+  );
 
   const userInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
