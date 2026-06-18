@@ -4,13 +4,7 @@ import useMovieSearch from "./hooks/useMovieSearch";
 import MovieCard from "./components/MovieCard";
 import MovieDetails from "./components/MovieDetails";
 import useDebounce from "./hooks/useDebounce";
-import type { Show } from "./types/movie.api";
-
-export interface SearchResult {
-  score: number;
-
-  show: Show;
-}
+import type { Show, SearchResult } from "./types/movie.api";
 
 function App() {
   const [searchQuery, setSearchQuery] = useState("");

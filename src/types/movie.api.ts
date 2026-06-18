@@ -11,3 +11,9 @@ export interface Show {
   };
   genres: string[];
 }
+
+export interface SearchResult {
+  score: number;
+
+  show: Show;
+}
