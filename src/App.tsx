@@ -12,23 +12,20 @@ function App() {
 
   const debouncedQuery = useDebounce(searchQuery, 500);
 
-  useEffect(() => {
-    setSelectedMovie(null);
-  }, [debouncedQuery]);
-
   const { searchResults, appStatus } = useMovieSearch(debouncedQuery);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
+    setSelectedMovie(null);
   };
 
   return (
     <div className="App">
       <h1>MOVIE SEARCH APP</h1>
 
-      <label htmlFor="userInput"></label>
       <input
         type="text"
+        aria-label="Search TV Shows"
         id="userInput"
         value={searchQuery}
         onChange={handleInputChange}
