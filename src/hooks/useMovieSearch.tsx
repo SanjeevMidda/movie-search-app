@@ -46,7 +46,7 @@ const useMovieSearch = (query: string) => {
 
     fetchData();
   }, [query]);
-  return { searchResults, appStatus };
+  return { searchResults, appStatus, error };
 };
 
 export default useMovieSearch;

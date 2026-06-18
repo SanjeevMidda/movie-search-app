@@ -12,7 +12,7 @@ function App() {
 
   const debouncedQuery = useDebounce(searchQuery, 500);
 
-  const { searchResults, appStatus } = useMovieSearch(debouncedQuery);
+  const { searchResults, appStatus, error } = useMovieSearch(debouncedQuery);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
@@ -34,7 +34,7 @@ function App() {
 
       {appStatus === "loading" && <p>Loading...</p>}
 
-      {appStatus === "error" && <p>Error loading data. Try again.</p>}
+      {appStatus === error && <p>Error loading data. Try again.</p>}
 
       {appStatus === "success" && searchResults.length === 0 && (
         <p>No results found.</p>
