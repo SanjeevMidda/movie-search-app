@@ -34,7 +34,7 @@ function App() {
 
       {appStatus === "loading" && <p>Loading...</p>}
 
-      {appStatus === error && <p>Error loading data. Try again.</p>}
+      {error && <p>Error loading data. Try again.</p>}
 
       {appStatus === "success" && searchResults.length === 0 && (
         <p>No results found.</p>
