@@ -16,9 +16,7 @@ function App() {
     setSelectedMovie(null);
   }, [debouncedQuery]);
 
-  const { searchResults, appStatus } = useMovieSearch(
-    `https://api.tvmaze.com/search/shows?q=${debouncedQuery}`
-  );
+  const { searchResults, appStatus } = useMovieSearch(debouncedQuery);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);

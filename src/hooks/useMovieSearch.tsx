@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Status } from "../types/status";
 
-const useMovieSearch = (url: string) => {
+const useMovieSearch = (query: string) => {
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [appStatus, setAppStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
@@ -11,7 +11,10 @@ const useMovieSearch = (url: string) => {
       setAppStatus("loading");
       setError(null);
 
-      const request = await fetch(url);
+      // const request = await fetch(url);
+      const request = await fetch(
+        `https://api.tvmaze.com/search/shows?q=${query}`
+      );
 
       if (!request.ok) {
         throw new Error(`HTTP error! Status: ${request.status}`);
@@ -27,12 +30,16 @@ const useMovieSearch = (url: string) => {
   };
 
   useEffect(() => {
-    if (!url) {
+    if (!query.trim()) {
+      setSearchResults([]);
+
+      setAppStatus("idle");
+
       return;
     }
 
     fetchData();
-  }, [url]);
+  }, [query]);
   return { searchResults, appStatus };
 };
 
