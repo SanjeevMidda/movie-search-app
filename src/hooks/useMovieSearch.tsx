@@ -16,6 +16,8 @@ const useMovieSearch = (query: string) => {
       return;
     }
 
+    const controller = new AbortController();
+
     const fetchData = async () => {
       try {
         setAppStatus("loading");
@@ -23,7 +25,10 @@ const useMovieSearch = (query: string) => {
         setError(null);
 
         const request = await fetch(
-          `https://api.tvmaze.com/search/shows?q=${encodeURIComponent(query)}`
+          `https://api.tvmaze.com/search/shows?q=${encodeURIComponent(query)}`,
+          {
+            signal: controller.signal,
+          }
         );
 
         if (!request.ok) {
@@ -36,15 +41,17 @@ const useMovieSearch = (query: string) => {
 
         setAppStatus("success");
       } catch (err: unknown) {
-        if (err instanceof Error) {
+        if (err instanceof Error && err.name !== "AbortError") {
           setError(err.message);
-        }
 
-        setAppStatus("error");
+          setAppStatus("error");
+        }
       }
     };
 
     fetchData();
+
+    return () => controller.abort();
   }, [query]);
   return { searchResults, appStatus, error };
 };
