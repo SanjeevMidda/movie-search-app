@@ -1,9 +1,19 @@
-export const normalizeMovie = (item: any) => ({
-  id: item.show.id,
+type Movie = {
+  id: number;
+  name: string;
+  image: string | null;
+  summary?: string;
+};
 
-  name: item.show.name,
+export const normalizeMovie = (item: any): Movie | null => {
+  if (!item?.show) {
+    return null;
+  }
 
-  image: item.show.image?.medium ?? null,
-
-  summary: item.show.summary ?? "",
-});
+  return {
+    id: item.show.id,
+    name: item.show.name,
+    image: item.show.image?.medium ?? null,
+    summary: item.show.summary,
+  };
+};

@@ -6,24 +6,18 @@ describe("normalizeMovie", () => {
     const input = {
       show: {
         id: 1,
-
         name: "Batman",
-
         image: {
           medium: "batman.jpg",
         },
-
         summary: "<p>Hero</p>",
       },
     };
 
     expect(normalizeMovie(input)).toEqual({
       id: 1,
-
       name: "Batman",
-
       image: "batman.jpg",
-
       summary: "<p>Hero</p>",
     });
   });
@@ -40,13 +34,14 @@ const input = {
 
 it("handles missing image data", () => {
   const result = normalizeMovie(input);
+  expect(result).not.toBeNull();
 
-  expect(result.image).toBeNull();
+  expect(result!.image).toBeNull();
 });
 
 // empty API results test
 it("handles empty API results", () => {
-  expect([]).toHaveLength(0);
+  expect(normalizeMovie(null)).toBeNull();
 });
 
 export {};
@@ -57,13 +52,10 @@ describe("normalizeMovie", () => {
     const apiMovie = {
       show: {
         id: 1,
-
         name: "Batman",
-
         image: {
           medium: "batman.jpg",
         },
-
         summary: "<p>Hero</p>",
       },
     };
@@ -72,11 +64,8 @@ describe("normalizeMovie", () => {
 
     expect(result).toEqual({
       id: 1,
-
       name: "Batman",
-
       image: "batman.jpg",
-
       summary: "<p>Hero</p>",
     });
   });
