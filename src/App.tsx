@@ -26,12 +26,11 @@ function App() {
       <input
         type="text"
         aria-label="Search TV Shows"
+        placeholder="Search for a TV show..."
         id="userInput"
         value={searchQuery}
         onChange={handleInputChange}
       />
-
-      {appStatus === "idle" && <p>Search for a TV show to get started.</p>}
 
       {appStatus === "loading" && <p>Loading...</p>}
 
