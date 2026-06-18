@@ -1,10 +1,3 @@
-// export interface Movie {
-//   show: string;
-//   name: string;
-//   image: string;
-//   sumamry: string;
-// }
-
 export interface Show {
   id: number;
   name: string;

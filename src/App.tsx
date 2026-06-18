@@ -3,19 +3,20 @@ import { useEffect, useState } from "react";
 import useMovieSearch from "./hooks/useMovieSearch";
 import MovieCard from "./components/MovieCard";
 import MovieDetails from "./components/MovieDetails";
+import useDebounce from "./hooks/useDebounce";
+import type { Show } from "./types/movie.api";
+
+export interface SearchResult {
+  score: number;
+
+  show: Show;
+}
 
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [debouncedQuery, setDebouncedQuery] = useState("");
-  const [selectedMovie, setSelectedMovie] = useState<any>(null);
+  const [selectedMovie, setSelectedMovie] = useState<Show | null>(null);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setDebouncedQuery(searchQuery);
-    }, 500);
-
-    return () => clearTimeout(timer);
-  }, [searchQuery]);
+  const debouncedQuery = useDebounce(searchQuery, 500);
 
   useEffect(() => {
     setSelectedMovie(null);
@@ -53,7 +54,7 @@ function App() {
 
       {appStatus === "success" &&
         searchResults.length > 0 &&
-        searchResults.map((result: any) => (
+        searchResults.map((result: SearchResult) => (
           <MovieCard
             key={result.show.id}
             movie={result.show}

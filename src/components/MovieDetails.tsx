@@ -1,15 +1,4 @@
-type Show = {
-  id: number;
-  name: string;
-  image?: {
-    medium: string;
-    original: string;
-  };
-  rating?: {
-    average: number | null;
-  };
-  genres: string[];
-};
+import type { Show } from "../types/movie.api";
 
 type MovieDetailsProps = {
   movie: Show | null;

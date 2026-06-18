@@ -1,11 +1,4 @@
-type Show = {
-  id: number;
-  name: string;
-  image?: {
-    medium: string;
-    original: string;
-  };
-};
+import type { Show } from "../types/movie.api";
 
 type MovieCardProps = {
   movie: Show;
