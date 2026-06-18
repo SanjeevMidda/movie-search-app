@@ -23,20 +23,22 @@ const useMovieSearch = (query: string) => {
         setError(null);
 
         const request = await fetch(
-          `https://api.tvmaze.com/search/shows?q=${query}`
+          `https://api.tvmaze.com/search/shows?q=${encodeURIComponent(query)}`
         );
 
         if (!request.ok) {
           throw new Error(`HTTP error! Status: ${request.status}`);
         }
 
-        const response = await request.json();
+        const response: SearchResult[] = await request.json();
 
         setSearchResults(response);
 
         setAppStatus("success");
-      } catch (err: any) {
-        setError(err.message);
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(err.message);
+        }
 
         setAppStatus("error");
       }
