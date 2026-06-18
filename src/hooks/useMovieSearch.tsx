@@ -10,7 +10,7 @@ const useMovieSearch = (query: string) => {
   useEffect(() => {
     if (!query.trim()) {
       setSearchResults([]);
-
+      setError(null);
       setAppStatus("idle");
 
       return;
