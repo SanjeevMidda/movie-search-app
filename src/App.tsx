@@ -1,5 +1,5 @@
 import "./styles/index.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useMovieSearch from "./hooks/useMovieSearch";
 import MovieCard from "./components/MovieCard";
 import MovieDetails from "./components/MovieDetails";
