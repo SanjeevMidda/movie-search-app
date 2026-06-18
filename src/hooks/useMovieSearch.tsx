@@ -1,33 +1,11 @@
 import { useEffect, useState } from "react";
 import { Status } from "../types/status";
+import type { SearchResult } from "../types/movie.api";
 
 const useMovieSearch = (query: string) => {
-  const [searchResults, setSearchResults] = useState<any[]>([]);
+  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [appStatus, setAppStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
-
-  const fetchData = async () => {
-    try {
-      setAppStatus("loading");
-      setError(null);
-
-      // const request = await fetch(url);
-      const request = await fetch(
-        `https://api.tvmaze.com/search/shows?q=${query}`
-      );
-
-      if (!request.ok) {
-        throw new Error(`HTTP error! Status: ${request.status}`);
-      }
-      const response = await request.json();
-      setAppStatus("success");
-
-      setSearchResults(response);
-    } catch (err: any) {
-      setError(err.message);
-      setAppStatus("error");
-    }
-  };
 
   useEffect(() => {
     if (!query.trim()) {
@@ -37,6 +15,32 @@ const useMovieSearch = (query: string) => {
 
       return;
     }
+
+    const fetchData = async () => {
+      try {
+        setAppStatus("loading");
+
+        setError(null);
+
+        const request = await fetch(
+          `https://api.tvmaze.com/search/shows?q=${query}`
+        );
+
+        if (!request.ok) {
+          throw new Error(`HTTP error! Status: ${request.status}`);
+        }
+
+        const response = await request.json();
+
+        setSearchResults(response);
+
+        setAppStatus("success");
+      } catch (err: any) {
+        setError(err.message);
+
+        setAppStatus("error");
+      }
+    };
 
     fetchData();
   }, [query]);
